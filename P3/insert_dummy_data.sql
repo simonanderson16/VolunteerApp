@@ -532,6 +532,3 @@ INSERT INTO organization_location (org_id, [location]) VALUES
 (28, '2525 Nutmeg St, City AB'),
 (29, '2626 Jasmine St, City AC'),
 (30, '2727 Gardenia St, City AD');
-
-
-SELECT * FROM review
