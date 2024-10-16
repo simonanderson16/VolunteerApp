@@ -20,7 +20,7 @@ SELECT p.name AS person_name, e.title AS event_title
 FROM sign_up s
 JOIN person p ON s.person_id = p.person_id
 JOIN event e ON s.event_id = e.event_id
-WHERE e.event_id = 1; -- Replace with the specific event_id
+WHERE e.event_id = 1;
 
 -- Query 5: Subquery - Find the organizations that have hosted more than 5 events
 SELECT name
@@ -58,13 +58,13 @@ FROM sign_up
 WHERE event_id IN (
     SELECT event_id
     FROM event
-    WHERE org_id = 1 -- Replace with the specific organization ID
+    WHERE org_id = 1
 )
 GROUP BY person_id
 HAVING COUNT(DISTINCT event_id) = (
     SELECT COUNT(event_id)
     FROM event
-    WHERE org_id = 1 -- Replace with the specific organization ID
+    WHERE org_id = 1
 );
 
 -- Query 10: Aggregate Query - Find the total number of events with tags assigned
