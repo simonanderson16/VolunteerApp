@@ -1,3 +1,5 @@
+USE FinalProject
+
 -- Query 1: Aggregate Query - Count the number of events hosted by each organization
 SELECT org_id, COUNT(event_id) AS total_events
 FROM event
@@ -38,11 +40,11 @@ WHERE capacity > (
 );
 
 -- Query 7: Aggregate Query - Find the maximum number of people who signed up for an event
-SELECT event_id, COUNT(person_id) AS total_sign_ups
+SELECT TOP 1 event_id, COUNT(person_id) AS total_sign_ups
 FROM sign_up
 GROUP BY event_id
-ORDER BY total_sign_ups DESC
-LIMIT 1;
+ORDER BY total_sign_ups DESC;
+
 
 -- Query 8: Join Query - Show the number of reviews for each event, including the event title
 SELECT e.title, COUNT(r.person_id) AS total_reviews
