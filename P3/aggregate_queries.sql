@@ -1,9 +1,10 @@
 USE FinalProject
 
--- Query 1: Aggregate Query - Count the number of events hosted by each organization
-SELECT org_id, COUNT(event_id) AS total_events
-FROM event
-GROUP BY org_id;
+-- Query 1: Aggregate Query - Count the number of volunteers signed up for a specific event
+SELECT event_id, COUNT(*) AS total_volunteers_signed_up
+FROM sign_up
+WHERE event_id = 1
+GROUP BY event_id;
 
 -- Query 2: Aggregate Query - Find the average rating for each event
 SELECT event_id, AVG(rating) AS average_rating
@@ -32,11 +33,14 @@ WHERE org_id IN (
     HAVING COUNT(event_id) > 5
 );
 
--- Query 6: Subquery - List the events with a capacity greater than the average capacity of all events
-SELECT title, capacity
+-- Query 6: Subquery - Find events where the number of sign-ups is less than 10
+SELECT event_id
 FROM event
-WHERE capacity > (
-    SELECT AVG(capacity) FROM event
+WHERE event_id IN (
+    SELECT event_id
+    FROM sign_up
+    GROUP BY event_id
+    HAVING COUNT(person_id) < 10
 );
 
 -- Query 7: Aggregate Query - Find the maximum number of people who signed up for an event
@@ -52,21 +56,18 @@ FROM event e
 LEFT JOIN review r ON e.event_id = r.event_id
 GROUP BY e.event_id, e.title;
 
--- Query 9: Subquery - Get the list of people who have signed up for all events of a particular organization
-SELECT person_id
-FROM sign_up
-WHERE event_id IN (
-    SELECT event_id
-    FROM event
-    WHERE org_id = 1
-)
-GROUP BY person_id
-HAVING COUNT(DISTINCT event_id) = (
-    SELECT COUNT(event_id)
-    FROM event
-    WHERE org_id = 1
+-- Query 9: Subquery - Find the number of organizations that have different tags
+SELECT COUNT(DISTINCT org_id) AS organizations_with_different_tags
+FROM organization_tag
+WHERE tag_id IN (
+    SELECT tag_id
+    FROM organization_tag
+    GROUP BY tag_id
+    HAVING COUNT(DISTINCT org_id) > 1
 );
 
--- Query 10: Aggregate Query - Find the total number of events with tags assigned
-SELECT COUNT(DISTINCT event_id) AS total_tagged_events
-FROM event_tag;
+-- Query 10: Aggregate Query - Find the different tags that organizations have
+SELECT t.name AS tag_name, COUNT(DISTINCT ot.org_id) AS organization_count
+FROM organization_tag ot
+JOIN tag t ON ot.tag_id = t.tag_id
+GROUP BY t.name;
