@@ -3,7 +3,7 @@ GO
 
 CREATE TABLE emergency_contact
 (
-    contact_id INT,
+    contact_id INT UNIQUE NOT NULL,
     [name] NVARCHAR(100) NOT NULL,
     phone_number NVARCHAR(20) NOT NULL,
     CONSTRAINT PK_emergency_contact PRIMARY KEY (contact_id)
@@ -11,10 +11,10 @@ CREATE TABLE emergency_contact
 
 CREATE TABLE person
 (
-    person_id INT,
+    person_id INT UNIQUE NOT NULL,
     [password] NVARCHAR(255) NOT NULL,
     [name] NVARCHAR(100) NOT NULL,
-    email NVARCHAR(100) NOT NULL,
+    email NVARCHAR(100) UNIQUE NOT NULL,
     contact_id INT NOT NULL,
     CONSTRAINT PK_person PRIMARY KEY (person_id),
     CONSTRAINT FK_person_contact FOREIGN KEY (contact_id) REFERENCES emergency_contact(contact_id)
@@ -22,7 +22,7 @@ CREATE TABLE person
 
 CREATE TABLE organization
 (
-    org_id INT,
+    org_id INT UNIQUE NOT NULL,
     [name] NVARCHAR(100) NOT NULL,
     [description] NVARCHAR(255),
     email NVARCHAR(100),
@@ -34,7 +34,7 @@ CREATE TABLE organization
 
 CREATE TABLE event
 (
-    event_id INT,
+    event_id INT UNIQUE NOT NULL,
     capacity INT NOT NULL,
     title NVARCHAR(100) NOT NULL,
     [description] NVARCHAR(255),
@@ -94,8 +94,8 @@ CREATE TABLE review
 
 CREATE TABLE tag
 (
-    tag_id INT,
-    name NVARCHAR(50) NOT NULL,
+    tag_id INT UNIQUE NOT NULL,
+    name NVARCHAR(50) UNIQUE NOT NULL,
     CONSTRAINT PK_tag PRIMARY KEY (tag_id)
 );
 

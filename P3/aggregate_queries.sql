@@ -7,9 +7,9 @@ WHERE event_id = 1
 GROUP BY event_id;
 
 -- Query 2: Aggregate Query - Find the average rating for each event
-SELECT event_id, AVG(rating) AS average_rating
-FROM review
-GROUP BY event_id;
+SELECT r.event_id, AVG(r.rating) AS average_rating
+FROM review r
+GROUP BY r.event_id;
 
 -- Query 3: Join Query - Get a list of all events with their corresponding organization names
 SELECT e.event_id, e.title, o.name AS organization_name
@@ -24,13 +24,13 @@ FROM sign_up s
 WHERE e.event_id = 1;
 
 -- Query 5: Subquery - Find the organizations that have hosted more than 5 events
-SELECT name
-FROM organization
-WHERE org_id IN (
-    SELECT org_id
-FROM event
-GROUP BY org_id
-HAVING COUNT(event_id) > 5
+SELECT o.name
+FROM organization o
+WHERE o.org_id IN (
+    SELECT e.org_id
+    FROM event e
+    GROUP BY e.org_id
+    HAVING COUNT(e.event_id) > 5
 );
 
 -- Query 6: Subquery - Find events where the number of sign-ups is less than 10
