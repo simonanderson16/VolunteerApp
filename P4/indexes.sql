@@ -1,0 +1,1 @@
+-- create 3 non-clustered indexes on tables

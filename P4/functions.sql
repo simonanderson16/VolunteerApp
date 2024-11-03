@@ -1,0 +1,1 @@
+-- 3 functions and emphasize how or why they would be used

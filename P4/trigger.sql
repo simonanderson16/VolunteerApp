@@ -1,0 +1,1 @@
+-- create 1 trigger associated with any type of action between the referenced tables (primary-foreign key relationship tables)

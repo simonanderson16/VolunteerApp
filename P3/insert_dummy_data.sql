@@ -35,7 +35,7 @@ INSERT INTO emergency_contact (contact_id, [name], phone_number) VALUES
 (30, 'David King', '555-0129');
 
 -- Insert into person
-INSERT INTO person (person_id, encrypted_password, [name], email, contact_id) VALUES
+INSERT INTO person (person_id, [password], [name], email, contact_id) VALUES
 (1, 'password1', 'Alice Johnson', 'alice.johnson@example.com', 1),
 (2, 'password2', 'Bob Smith', 'bob.smith@example.com', 2),
 (3, 'password3', 'Charlie Brown', 'charlie.brown@example.com', 3),

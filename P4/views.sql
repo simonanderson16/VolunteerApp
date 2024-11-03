@@ -1,0 +1,1 @@
+-- create 3 views for any 3 tables

@@ -12,7 +12,7 @@ CREATE TABLE emergency_contact
 CREATE TABLE person
 (
     person_id INT,
-    encrypted_password NVARCHAR(255) NOT NULL,
+    [password] NVARCHAR(255) NOT NULL,
     [name] NVARCHAR(100) NOT NULL,
     email NVARCHAR(100) NOT NULL,
     contact_id INT NOT NULL,
