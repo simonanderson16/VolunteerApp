@@ -1,4 +1,3 @@
-
 --Fetches all the orgs the user is a part of. Useful for letting the user see where they belong. 
 CREATE FUNCTION GetUserOrganizations
 (
@@ -42,7 +41,6 @@ RETURN
 GO
 
 --Fetches all events with a certain tag name. Will allow users to search for certain types of events they want to attend, like "Nature". 
-
 CREATE FUNCTION GetEventsByTag
 (
     @tag_name NVARCHAR(50)
