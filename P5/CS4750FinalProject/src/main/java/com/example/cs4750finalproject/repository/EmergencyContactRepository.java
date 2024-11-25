@@ -8,4 +8,3 @@ import java.util.List;
 public interface EmergencyContactRepository extends JpaRepository<EmergencyContact, Integer> {
     List<EmergencyContact> findByNameContaining(String name);
 }
-
