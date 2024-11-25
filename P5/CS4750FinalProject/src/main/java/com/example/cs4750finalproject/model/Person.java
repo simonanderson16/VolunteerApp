@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Mark the ID as auto-generated
     @Column(name = "person_id")
     private Integer personId;
 
@@ -22,7 +22,7 @@ public class Person {
 
     @ManyToOne
     @JoinColumn(name = "contact_id", nullable = false)
-    private EmergencyContact emergencyContact; // Foreign key reference
+    private EmergencyContact emergencyContact; // Reference to EmergencyContact entity
 
     public Person() {}
 
