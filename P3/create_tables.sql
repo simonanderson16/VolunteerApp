@@ -43,7 +43,9 @@ CREATE TABLE event
     [location] NVARCHAR(100),
     org_id INT NOT NULL,
     CONSTRAINT PK_event PRIMARY KEY (event_id),
-    CONSTRAINT FK_event_organization FOREIGN KEY (org_id) REFERENCES organization(org_id),
+    CONSTRAINT FK_event_organization FOREIGN KEY (org_id)
+        REFERENCES organization(org_id)
+        ON DELETE CASCADE,
     CONSTRAINT CHK_event_capacity CHECK (capacity > 0),
     CONSTRAINT CHK_event_time CHECK (start_time < end_time)
 );
@@ -54,8 +56,12 @@ CREATE TABLE belongs_to
     org_id INT,
     role NVARCHAR(50),
     CONSTRAINT PK_belongs_to PRIMARY KEY (person_id, org_id),
-    CONSTRAINT FK_belongs_to_person FOREIGN KEY (person_id) REFERENCES person(person_id),
-    CONSTRAINT FK_belongs_to_organization FOREIGN KEY (org_id) REFERENCES organization(org_id)
+    CONSTRAINT FK_belongs_to_person FOREIGN KEY (person_id) 
+        REFERENCES person(person_id)
+        ON DELETE CASCADE,
+    CONSTRAINT FK_belongs_to_organization FOREIGN KEY (org_id) 
+        REFERENCES organization(org_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE sign_in
@@ -87,8 +93,12 @@ CREATE TABLE review
     rating INT,
     content NVARCHAR(255),
     CONSTRAINT PK_review PRIMARY KEY (person_id, event_id, [timestamp]),
-    CONSTRAINT FK_review_person FOREIGN KEY (person_id) REFERENCES person(person_id),
-    CONSTRAINT FK_review_event FOREIGN KEY (event_id) REFERENCES event(event_id),
+    CONSTRAINT FK_review_person FOREIGN KEY (person_id)
+        REFERENCES person(person_id)
+        ON DELETE CASCADE,
+    CONSTRAINT FK_review_event FOREIGN KEY (event_id)
+        REFERENCES event(event_id)
+        ON DELETE CASCADE,
     CONSTRAINT CHK_review_rating CHECK (rating >= 1 AND rating <= 5)
 );
 
