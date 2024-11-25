@@ -1,7 +1,5 @@
 package com.example.cs4750finalproject.model;
-
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "emergency_contact")
@@ -10,7 +8,7 @@ public class EmergencyContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id")
-    private Integer contactId;
+    private int contactId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -18,10 +16,9 @@ public class EmergencyContact {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "emergencyContact", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Person> persons;
-
-    public EmergencyContact() {}
+    public EmergencyContact() {
+        // Default constructor
+    }
 
     public EmergencyContact(String name, String phoneNumber) {
         this.name = name;
@@ -29,11 +26,11 @@ public class EmergencyContact {
     }
 
     // Getters and Setters
-    public Integer getContactId() {
+    public int getContactId() {
         return contactId;
     }
 
-    public void setContactId(Integer contactId) {
+    public void setContactId(int contactId) {
         this.contactId = contactId;
     }
 
@@ -51,13 +48,5 @@ public class EmergencyContact {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
     }
 }
